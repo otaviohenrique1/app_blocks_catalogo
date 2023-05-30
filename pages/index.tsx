@@ -6,6 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo_web from "@/assets/images/logo_web.png";
+import logo_mobile from "@/assets/images/logo_mobile.png";
 import imagem from "@/assets/images/imagem.png";
 
 import { Open_Sans } from 'next/font/google';
@@ -13,6 +14,8 @@ import Link from 'next/link';
 const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export default function Home() {
+  // let a: number = window.innerWidth;
+  
   return (
     <>
       <Head>
@@ -33,7 +36,8 @@ export default function Home() {
         <div>
           <section className={`d-flex flex-column justify-content-center align-items-center ${styles.area_logo}`}>
             {/* Arrumar - Quando for para o mobile mudar para o logo mobile */}
-            <Image src={logo_web} alt="logo_web" className={styles.logo} />
+            <span className={styles.logo}></span>
+            {/* <Image src={logo_mobile} alt="logo_mobile" className={styles.logo} /> */}
             <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`} />
           </section>
 

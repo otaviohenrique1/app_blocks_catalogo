@@ -55,7 +55,14 @@
 /* Area do logo */
 .area_logo {}
 
+
 .logo {
+  background-image: url("/logo_web.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 146px;
+  height: 54px;
   margin-top: 13px;
   margin-bottom: 13px;
 }
@@ -151,6 +158,15 @@
 @media (max-width: 800px) {
   .main_container {
     flex-direction: column-reverse;
+  }
+
+  .logo {
+    background-image: url("/logo_mobile.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 91px;
+    height: 34px;
   }
 
   .mensagem {
