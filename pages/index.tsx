@@ -1,17 +1,112 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button, Card, CardBody, CardFooter, CardText, Col, Row } from 'reactstrap';
 import { BsArrowUpRight, BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagem from "@/assets/images/imagem.png";
-
+import api from "@/utils/api";
 import { Open_Sans } from 'next/font/google';
-import Link from 'next/link';
+import { log } from 'console';
+import axios from 'axios';
 const open_sans = Open_Sans({ subsets: ['latin'] });
 
+
+
+interface DetailsTypes {
+  name: string;
+  description: string;
+}
+
+interface DataTypes {
+  id: string;
+  premium: boolean;
+  details: DetailsTypes;
+}
+
+let a = [
+  {
+    "id": "0032a1b5-8b30-4e10-a27c-3bd818d2f376",
+    "premium": true,
+    "details": {
+      "name": "Copo Descartável",
+      "description": "Copo descartável para café"
+    }
+  },
+  {
+    "id": "00577e1d-1c0f-4992-a680-bc29c305202d",
+    "premium": true,
+    "details": {
+      "name": "Balanço Rústico",
+      "description": "Banco de madeira para 2 pessoas"
+    }
+  }
+];
+
+interface DataListType {
+  id: string;
+  premium: boolean;
+  details: {
+    name: string;
+    description: string;
+  };
+}
+
+const dadosIniciais: DataListType = {
+  id: '',
+  premium: false,
+  details: {
+    name: '',
+    description: ''
+  }
+};
+
+/*
+  http://localhost:8080/families*
+  http://localhost:8080/families?skip=0&take=10
+  http://localhost:8080/families?skip=10&take=10
+  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/ID DA FAMÍLIA.jpg
+  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/abc-123.jpg
+*/
+
 export default function Home() {
+  const [data, setData] = useState<DataTypes[]>([]);
+  const [item, setItem] = useState<DataListType>(dadosIniciais);
+  const [pagina, setPagina] = useState<number>(0);
+
+  useEffect(() => {
+    // let inicio = 0;
+    // let fim = 2;
+    // api.get(`skip=${inicio}&take=${fim}`)
+    //   .then((itens) => {
+    //     // let lista = itens.data;
+    //     // setData(lista);
+    //     // console.log(lista);
+    //   })
+    //   .catch((erro) => {
+    //     console.log(erro);
+    //   });
+    axios.get("http://localhost:8080/families?skip=20&take=10")
+      .then((data) => {
+        let lista = [...data.data];
+        console.log(lista);
+        
+        // console.log(lista[1]);
+        // setItem(lista);
+        // console.log(item);
+
+        // console.log(data.data);
+        // setData([...items.data]);
+        // console.log(data);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  }, []);
+
   return (
     <>
       <Head>
@@ -31,7 +126,7 @@ export default function Home() {
 
         <div>
           <section className={`d-flex flex-column justify-content-center align-items-center ${styles.area_logo}`}>
-            <span className={styles.logo}/>
+            <span className={styles.logo} />
             <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`} />
           </section>
 
