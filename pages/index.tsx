@@ -8,6 +8,7 @@ import logo_web from "@/assets/images/logo_web.png";
 import imagem from "@/assets/images/imagem.png";
 
 import { Open_Sans } from 'next/font/google';
+import Link from 'next/link';
 const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export default function Home() {
@@ -65,13 +66,11 @@ export default function Home() {
             </Row>
           </section>
 
-          <footer className={`d-flex flex-column justify-content-center align-items-center ${styles.rodape}`}>
-            <ul className={`list-unstyled d-flex mb-0 ${styles.rodape_lista}`}>
-              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</li>
-              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>FAQ</li>
-              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Termos de uso</li>
-              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Politica de privacidade</li>
-            </ul>
+          <footer className={`d-flex ${styles.rodape}`}>
+            <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</Link>
+            <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>FAQ</Link>
+            <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Termos de uso</Link>
+            <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Politica de privacidade</Link>
           </footer>
 
         </div>

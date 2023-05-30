@@ -54,8 +54,8 @@
 .catalogo {
   padding-top: 29px;
   padding-bottom: 29px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 150px;
+  padding-right: 150px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -73,8 +73,8 @@
 
 /* Resultados */
 .resultados {
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
 .resultados_titulo {
@@ -116,30 +116,58 @@
   margin-top: 48px;
   padding-top: 21.5px;
   padding-bottom: 21.5px;
+  padding-left: 200px;
+  padding-right: 200px;
   background-color: #E9E9E9;
+  gap: 36px;
+  justify-content: center;
+  align-items: center;
 }
 
-.rodape_lista {
-  gap: 36px;
-}
 
 .rodape_lista_item {
   font-weight: 400;
   font-size: 16px;
   color: #322E2E;
+  display: flex;
+  flex-direction: row;
 }
 
 @media (max-width: 1400px) {}
 @media (max-width: 1200px) {}
 
 @media (max-width: 800px) {
+  .rodape {
+    flex-direction: column !important;
+    gap: 12px;
+    justify-content: center;
+    align-items: start;
+  }
+  
   .main_container {
     flex-direction: column-reverse;
+  }
+
+  .catalogo, .resultados, .rodape {
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
 
 @media (max-width: 400px) {
+  .rodape {
+    flex-direction: column !important;
+    gap: 12px;
+    justify-content: center;
+    align-items: start;
+  }
+
   .main_container {
     flex-direction: column-reverse;
+  }
+
+  .catalogo, .resultados, .rodape {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
