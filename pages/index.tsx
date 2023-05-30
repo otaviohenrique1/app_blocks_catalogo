@@ -73,7 +73,7 @@ const dadosIniciais: DataListType = {
 */
 
 export default function Home() {
-  const [data, setData] = useState<DataTypes[]>([]);
+  const [data, setData] = useState<DataListType[]>([]);
   const [item, setItem] = useState<DataListType>(dadosIniciais);
   const [pagina, setPagina] = useState<number>(0);
 
@@ -89,17 +89,19 @@ export default function Home() {
     //   .catch((erro) => {
     //     console.log(erro);
     //   });
-    axios.get("http://localhost:8080/families?skip=20&take=10")
+    axios.get("http://localhost:8080/families?skip=0&take=10")
       .then((data) => {
         let lista = [...data.data];
-        console.log(lista);
-        
+        // console.log(lista);
+        setData(lista);
+
         // console.log(lista[1]);
         // setItem(lista);
         // console.log(item);
 
         // console.log(data.data);
         // setData([...items.data]);
+        // console.log(data);
         // console.log(data);
       })
       .catch((erro) => {
@@ -138,6 +140,11 @@ export default function Home() {
           <section /* className="me-5 ms-5" */ className={`${styles.resultados}`}>
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
             <Row className="p-0 m-0">
+              {data.map((item, index) => {
+                return <p key={item.id.toString()}>{item.id.toString()}</p>;
+              })}
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              {/* <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
@@ -156,12 +163,9 @@ export default function Home() {
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
-              <ItemResultadoCatalogo></ItemResultadoCatalogo>
-              <ItemResultadoCatalogo></ItemResultadoCatalogo>
-              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo> */}
             </Row>
           </section>
-
           <footer className={`d-flex ${styles.rodape}`}>
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</Link>
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>FAQ</Link>
