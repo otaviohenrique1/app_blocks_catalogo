@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Button, Card, CardBody, CardFooter, CardText, Col, Row } from 'reactstrap';
-import { BsArrowUpRight } from "react-icons/bs";
+import { BsArrowUpRight, BsArrowRight } from "react-icons/bs";
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo_web from "@/assets/images/logo_web.png";
@@ -20,11 +20,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="d-flex flex-column">
+      <main className={`d-flex ${styles.main_container}`}>
 
         <div className={`d-flex justify-content-center align-items-center pt-3 pb-3 ${styles.mensagem}`}>
           <p className={`mb-0 me-2 ${styles.mensagem_titulo} ${open_sans.className}`}>Não limite sua criatividade, junte-se a familia Blocks por apenas <span className={`fw-bold ${open_sans.className}`}>BRL 19,99</span></p>
-          <Button className={`${styles.gradiente} ${styles.botao} ${open_sans.className}`}>Quero ser Premium</Button>
+          <Button className={`${styles.gradiente} ${styles.mensagem_botao} ${open_sans.className}`}>Quero ser Premium <BsArrowRight color="#FFFFFF" size={24} /></Button>
         </div>
 
         <div>
@@ -88,9 +88,9 @@ function ItemResultadoCatalogo() {
           <Image src={imagem} alt="imagem" className="img-fluid" />
         </CardBody>
         <CardFooter className="d-flex justify-content-center align-items-center">
-          <CardText className={`mb-0 ${open_sans.className}`}>Lorem Ipsum is sLorem Ipsum is simply ....</CardText>
+          <CardText className={`mb-0 ${open_sans.className} ${styles.card_texto}`}>Lorem Ipsum is sLorem Ipsum is simply ....</CardText>
           <span className={`me-2 ms-2 ${styles.cardtext_separator}`} />
-          <BsArrowUpRight color='#474747' size={16} />
+          <BsArrowUpRight color='#474747' size={16} className={styles.card_icone_botao} />
         </CardFooter>
       </Card>
     </Col>
