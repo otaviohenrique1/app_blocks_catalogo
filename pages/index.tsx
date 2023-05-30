@@ -19,23 +19,42 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="d-flex flex-column">
+
         <div className={`d-flex justify-content-center align-items-center pt-3 pb-3 ${styles.mensagem}`}>
           <p className={`mb-0 me-2 ${styles.mensagem_titulo} ${open_sans.className}`}>Não limite sua criatividade, junte-se a familia Blocks por apenas <span className={`fw-bold ${open_sans.className}`}>BRL 19,99</span></p>
           <Button className={`${styles.gradiente} ${styles.botao} ${open_sans.className}`}>Quero ser Premium</Button>
         </div>
-        <div className="ps-4 pe-4">
-          <section className={`d-flex flex-column justify-content-center align-items-center`}>
-            <Image src={logo_web} alt="logo_web" />
-            <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`}/>
+
+        <div>
+          <section className={`d-flex flex-column justify-content-center align-items-center ${styles.area_logo}`}>
+            <Image src={logo_web} alt="logo_web" className={styles.logo} />
+            <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`} />
           </section>
+
           <section className={`d-flex flex-column justify-content-center align-items-start ${styles.catalogo}`}>
             <h1 className={`${open_sans.className} ${styles.catalogo_titulo}`}>Catálogo</h1>
-            <span className={`${styles.gradiente} ${styles.catalogo_span_gradiente}`}/>
+            <span className={`${styles.gradiente} ${styles.catalogo_span_gradiente}`} />
           </section>
+
           <section>
             <h2 className={`${styles.resultados} ${open_sans.className}`}>Resultados</h2>
-            <Row>
+            <Row /* className="p-0 m-0 gap-2" */>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
+              <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
@@ -45,14 +64,16 @@ export default function Home() {
               <ItemResultadoCatalogo></ItemResultadoCatalogo>
             </Row>
           </section>
-          <footer>
-            <ul className="list-unstyled d-flex gap-2">
-              <li className={`${open_sans.className}`}>Sobre</li>
-              <li className={`${open_sans.className}`}>FAQ</li>
-              <li className={`${open_sans.className}`}>Termos de uso</li>
-              <li className={`${open_sans.className}`}>Politica de privacidade</li>
+
+          <footer className={`d-flex flex-column justify-content-center align-items-center ${styles.rodape}`}>
+            <ul className={`list-unstyled d-flex mb-0 ${styles.rodape_lista}`}>
+              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</li>
+              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>FAQ</li>
+              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Termos de uso</li>
+              <li className={`${open_sans.className} ${styles.rodape_lista_item}`}>Politica de privacidade</li>
             </ul>
           </footer>
+
         </div>
       </main>
     </>
@@ -61,14 +82,14 @@ export default function Home() {
 
 function ItemResultadoCatalogo() {
   return (
-    <Col className={`mb-4 ${styles.card_col}`}>
+    <Col /* p-0 m-0 */ className={`mb-4 ${styles.card_col}`}>
       <Card className={`${styles.card_container}`}>
         <CardBody className="d-flex justify-content-center align-items-center">
           <Image src={imagem} alt="imagem" className="img-fluid" />
         </CardBody>
         <CardFooter className="d-flex justify-content-center align-items-center">
           <CardText className={`mb-0 ${open_sans.className}`}>Lorem Ipsum is sLorem Ipsum is simply ....</CardText>
-          <span className={`me-2 ms-2 ${styles.cardtext_separator}`}/>
+          <span className={`me-2 ms-2 ${styles.cardtext_separator}`} />
           <BsArrowUpRight color='#474747' size={16} />
         </CardFooter>
       </Card>
