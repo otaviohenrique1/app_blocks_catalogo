@@ -1,8 +1,69 @@
-.main_container {
-  display: flex;
-  flex-direction: column;
+/*
+  #202020 => Preto / Texto PRIMÁRIO
+  #FFFFFF => Branco / Texto SECUNDÁRIO
+  #FBFBFB => Branco / BACKGROUND
+  #CCCCCC => Cinza / Borda CARD
+  #D835C5 > #A11CF3 => GRADIENTE / PRIMÁRIO
+*/
+
+.main_container {}
+
+.botao {
+  border: 1px solid #D835C5;
+  color: #FFFFFF;
 }
 
-.botao {}
+/* Arrumar */
+.botao:hover {
+  opacity:7;
+}
 
-.mensagem {}
+.mensagem {
+  background-color: #202020;
+}
+
+.mensagem_titulo {
+  color: #FFFFFF;
+  font-size: 18;
+  font-weight: 400;
+}
+
+.gradiente {
+  background-image: linear-gradient(to right, #D835C5, #A11CF3);
+}
+
+.borda_gradiente {
+  height: 1px;
+}
+
+.catalogo_titulo {}
+
+.catalogo {
+  padding-top: 29px;
+  padding-bottom: 29px;
+}
+
+.catalogo_span_gradiente {
+  height: 4px;
+  width: 34px;
+  border-radius: 10px;
+}
+
+.resultados {
+  margin-top: 34px;
+  margin-bottom: 18px;
+}
+
+.card_col {}
+
+.card_container {
+  border-radius: 8px;
+  width: 18rem;
+}
+
+.cardtext_separator {
+  background-color: #CCCCCC;
+  border-radius: 8px;
+  width: 1px;
+  height: 20px;
+}
