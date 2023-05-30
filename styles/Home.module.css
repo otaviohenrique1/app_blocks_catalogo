@@ -87,6 +87,7 @@
 
 /* Resultados */
 .resultados {
+  font-size: 24px;
   padding-left: 150px;
   padding-right: 150px;
 }
@@ -164,6 +165,14 @@
   .botao_close {
     display: block !important;
   }  
+
+  .catalogo_titulo {
+    font-size: 24px;
+  }  
+
+  .resultados {
+    font-size: 20px;
+  }
   
   .catalogo, .resultados, .rodape {
     padding-left: 50px;
@@ -183,40 +192,12 @@
 }
 
 @media (max-width: 400px) {
-  .main_container {
-    flex-direction: column-reverse;
-  }
-  
-  .mensagem {
-    padding-top: 24px;
-    padding-bottom: 24px;
-    padding-left: 14px;
-    padding-right: 14px;
-    flex-direction: column;
-    gap: 18px;
-  }
-
   .mensagem_titulo {
     font-size: 15px;
-  }
-
-  .botao_close {
-    display: block !important;
   }
 
   .catalogo, .resultados, .rodape {
     padding-left: 14px;
     padding-right: 14px;
-  }
-
-  .rodape_lista_item {
-    font-size: 14px;
-  }
-  
-  .rodape {
-    flex-direction: column !important;
-    gap: 12px;
-    justify-content: center;
-    align-items: start;
   }
 }
