@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Button, Card, CardBody, CardFooter, CardText, Col, Row } from 'reactstrap';
 import { BsArrowUpRight, BsArrowRight } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo_web from "@/assets/images/logo_web.png";
@@ -23,13 +24,15 @@ export default function Home() {
 
       <main className={`d-flex ${styles.main_container}`}>
 
-        <div className={`d-flex justify-content-center align-items-center pt-3 pb-3 ${styles.mensagem}`}>
+        <div className={`d-flex ${styles.mensagem}`}>
+          <Button className={`${styles.botao_close}`}>Fechar <IoMdClose size={16} color="#FFFFFF" /></Button>
           <p className={`mb-0 me-2 ${styles.mensagem_titulo} ${open_sans.className}`}>Não limite sua criatividade, junte-se a familia Blocks por apenas <span className={`fw-bold ${open_sans.className}`}>BRL 19,99</span></p>
           <Button className={`${styles.gradiente} ${styles.mensagem_botao} ${open_sans.className}`}>Quero ser Premium <BsArrowRight color="#FFFFFF" size={24} /></Button>
         </div>
 
         <div>
           <section className={`d-flex flex-column justify-content-center align-items-center ${styles.area_logo}`}>
+            {/* Arrumar - Quando for para o mobile mudar para o logo mobile */}
             <Image src={logo_web} alt="logo_web" className={styles.logo} />
             <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`} />
           </section>
