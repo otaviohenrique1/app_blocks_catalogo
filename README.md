@@ -1,40 +1,58 @@
 # app_blocks_catalogo
 
 ## Scripts
--npm run dev
--npm run build
--npm run start
--npm run lint
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. npm run dev
+Este script é usado durante o desenvolvimento. Ele inicia o servidor de desenvolvimento do Next.js na porta 3000, no link [http://localhost:3000](http://localhost:3000).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. npm run build
+Este script é usado para construir o aplicativo Next.js para produção.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+3. npm run start
+Após a construção do aplicativo usando npm run build, este script é usado para iniciar o servidor de produção do Next.js.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+4. npm run lint
+Este script é usado para executar uma análise estática no código-fonte do seu aplicativo usando uma ferramenta de linting, como o ESLint.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Leia mais
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Next.js
 
-## Learn More
+- [Site oficial](https://nextjs.org/)
+- [Documentação](https://nextjs.org/docs)
+- [Tutorial](https://nextjs.org/learn)
+- [Repositório no GitHub](https://github.com/vercel/next.js/)
 
-To learn more about Next.js, take a look at the following resources:
+2. Reactjs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Site oficial](https://react.dev/)
+- [Tutorial](https://react.dev/learn)
+- [Api](https://react.dev/reference/react)
+- [Repositório no GitHub](https://github.com/facebook/react)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Bootstrap
 
-## Deploy on Vercel
+- [Site oficial](https://getbootstrap.com/)
+- [Documentação](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [Repositório no GitHub](https://github.com/twbs/bootstrap)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Reactstrap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Documentação](https://reactstrap.github.io/?path=/story/home-installation--page)
+- [Repositório no GitHub](https://github.com/reactstrap/reactstrap)
+
+5. react-icons
+
+- [Documentação](https://react-icons.github.io/react-icons/)
+- [Repositório no GitHub](https://github.com/react-icons/react-icons)
+
+6. Axios
+
+- [Site oficial](https://axios-http.com/)
+- [Documentação](https://axios-http.com/docs/intro)
+- [Repositório no GitHub](https://github.com/axios/axios)
+
+7. react-infinite-scroll-component
+
+- [Repositório no GitHub](https://github.com/ankeetmaini/react-infinite-scroll-component)
+- [Documentação](https://github.com/ankeetmaini/react-infinite-scroll-component/tree/master/docs)
