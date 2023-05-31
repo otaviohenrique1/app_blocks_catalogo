@@ -14,6 +14,12 @@ Após a construção do aplicativo usando npm run build, este script é usado pa
 4. npm run lint
 Este script é usado para executar uma análise estática no código-fonte do seu aplicativo usando uma ferramenta de linting, como o ESLint.
 
+## Instruções
+
+1. Script 'npm run run' do projeto 'frontend-test' no terminal para iniciar a parte backend.
+2. Script 'npm run dev' do projeto 'app_blocks_catalogo' no terminal para iniciar a parte frontend.
+3. Acessar o link [http://localhost:3000](http://localhost:3000) no navegador para ver os resultados.
+
 ## Leia mais
 
 1. Next.js
@@ -56,3 +62,10 @@ Este script é usado para executar uma análise estática no código-fonte do se
 
 - [Repositório no GitHub](https://github.com/ankeetmaini/react-infinite-scroll-component)
 - [Documentação](https://github.com/ankeetmaini/react-infinite-scroll-component/tree/master/docs)
+
+8. react-loader-spinner
+
+- [Site oficial](https://mhnpd.github.io/react-loader-spinner/)
+- [Documentação](https://mhnpd.github.io/react-loader-spinner/docs/intro)
+- [Componente usado](https://mhnpd.github.io/react-loader-spinner/docs/components/tail-spin)
+- [Repositório no GitHub](https://github.com/mhnpd/react-loader-spinner)
