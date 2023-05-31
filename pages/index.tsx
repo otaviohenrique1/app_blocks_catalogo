@@ -5,19 +5,19 @@ import { Button, Row } from 'reactstrap';
 import { BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ItemResultadoCatalogo } from './components/ItemResultadoCatalogo';
 import axios from 'axios';
 import { DataListType } from '@/types/types';
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ItemResultadoCatalogo } from './ItemResultadoCatalogo';
 import { Open_Sans } from 'next/font/google';
+import { TailSpin } from 'react-loader-spinner';
 
 const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export default function Home() {
   const [items, setItems] = useState<DataListType[]>([]);
   const [page, setPage] = useState<number>(1);
-  // const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {
     fetchData();
@@ -31,7 +31,7 @@ export default function Home() {
     axios.get(url)
       .then((data) => {
         let novosItens = data.data;
-        
+
         setItems([...items, ...novosItens]);
         setPage(page + 10)
       })
@@ -48,40 +48,45 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={`d-flex ${styles.main_container}`}>
-
         <div className={`d-flex ${styles.mensagem}`}>
           <Button className={`${styles.botao_close}`}>Fechar <IoMdClose size={16} color="#FFFFFF" /></Button>
           <p className={`mb-0 me-2 ${styles.mensagem_titulo} ${open_sans.className}`}>Não limite sua criatividade, junte-se a familia Blocks por apenas <span className={`fw-bold ${open_sans.className}`}>BRL 19,99</span></p>
           <Button className={`${styles.gradiente} ${styles.mensagem_botao} ${open_sans.className}`}>Quero ser Premium <BsArrowRight color="#FFFFFF" size={24} /></Button>
         </div>
-
         <div>
-          <section className={`d-flex flex-column justify-content-center align-items-center ${styles.area_logo}`}>
+          <section className="d-flex flex-column justify-content-center align-items-center">
             <span className={styles.logo} />
             <span className={`w-100 ${styles.gradiente} ${styles.borda_gradiente}`} />
           </section>
-
           <section className={`d-flex flex-column justify-content-center align-items-start ${styles.catalogo}`}>
             <h1 className={`${open_sans.className} ${styles.catalogo_titulo}`}>Catálogo</h1>
             <span className={`${styles.gradiente} ${styles.catalogo_span_gradiente}`} />
           </section>
-
           <section className={`${styles.resultados}`}>
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
             <InfiniteScroll
               dataLength={items.length}
               next={fetchData}
-              // hasMore={hasMore}
               hasMore={true}
-              loader={<h4>Carregando...</h4>}
+              loader={
+                <TailSpin
+                  height="80"
+                  width="80"
+                  color="#A11CF3"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                />
+              }
             >
               <Row className="p-0 m-0">
                 {items.map((item, index) => {
                   return (
                     <ItemResultadoCatalogo
-                      key={item.id}
+                      key={`${index}-${item.id}`}
                       id={item.id}
                       details={item.details}
                       premium={item.premium}
@@ -90,7 +95,6 @@ export default function Home() {
                 })}
               </Row>
             </InfiniteScroll>
-
           </section>
           <footer className={`d-flex ${styles.rodape}`}>
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</Link>
@@ -98,11 +102,8 @@ export default function Home() {
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Termos de uso</Link>
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Politica de privacidade</Link>
           </footer>
-
         </div>
       </main>
     </>
   );
 }
-
-

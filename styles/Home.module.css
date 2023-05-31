@@ -57,8 +57,6 @@
 }
 
 /* Area do logo */
-.area_logo {}
-
 .logo {
   background-image: url("/logo_web.png");
   background-repeat: no-repeat;
@@ -141,8 +139,8 @@
   margin-top: 48px;
   padding-top: 21.5px;
   padding-bottom: 21.5px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 150px;
+  padding-right: 150px;
   background-color: #E9E9E9;
   gap: 36px;
   justify-content: center;
