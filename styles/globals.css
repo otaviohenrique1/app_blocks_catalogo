@@ -1,3 +1,15 @@
+:root {
+  --preto-texto-primario--: #202020;
+  --branco-texto-secundario--: #FFFFFF;
+  --branco-background--: #FBFBFB;
+  --cinza-borda-card--: #CCCCCC;
+  --gradiente-primario--: linear-gradient(to right, #A11CF3, #D835C5);
+}
+
+.teste {
+  color: var(--gradiente-primario--);
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;

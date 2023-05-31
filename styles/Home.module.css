@@ -21,6 +21,8 @@
   padding-bottom: 12px;
   justify-content: center;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .mensagem_titulo {
@@ -42,7 +44,7 @@
 .mensagem_botao:active {
   opacity: 1;
   border: 1px solid #A11CF3;
-  background-image: linear-gradient(to right, #D835C5, #A11CF3);
+  background-image: linear-gradient(to right, #3e0561, #3e0561);
 }
 
 .botao_close {

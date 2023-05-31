@@ -5,30 +5,14 @@ import { Button, Row } from 'reactstrap';
 import { BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import axios from 'axios';
+import { DataListType } from '@/types/types';
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Open_Sans } from 'next/font/google';
 import { ItemResultadoCatalogo } from './ItemResultadoCatalogo';
-import axios from 'axios';
-export const open_sans = Open_Sans({ subsets: ['latin'] });
+import { Open_Sans } from 'next/font/google';
 
-export interface DataListType {
-  id: string;
-  premium: boolean;
-  details: {
-    name: string;
-    description: string;
-  };
-}
-
-const dadosIniciais: DataListType = {
-  id: '',
-  premium: false,
-  details: {
-    name: '',
-    description: ''
-  }
-};
+const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export default function Home() {
   const [items, setItems] = useState<DataListType[]>([]);
@@ -38,48 +22,6 @@ export default function Home() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  /*
-    const fetchData = () => {
-      let itensPorPagina = 20;
-
-      let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          let novosItens = data;
-          let proximaPagina: boolean = data.hasNextPage;
-          console.log(proximaPagina);
-          
-          setItems([...items, ...novosItens]);
-          setHasMore(proximaPagina);
-          setPage(page + 10)
-        })
-        .catch((erro) => {
-          console.error('Erro ao buscar dados:', erro);
-        });
-    };
-  */
-
-  /*
-    const fetchData = () => {
-      let itensPorPagina = 20;
-
-      let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
-
-      axios.get(url)
-        .then((data) => {
-          let novosItens = data.data;
-          
-          setItems([...items, ...novosItens]);
-          setPage(page + 10)
-        })
-        .catch((erro) => {
-          console.error('Erro ao buscar dados:', erro);
-        });
-    };
-  */
 
   const fetchData = () => {
     let itensPorPagina = 20;
@@ -148,19 +90,6 @@ export default function Home() {
                 })}
               </Row>
             </InfiniteScroll>
-
-            {/* <Row className="p-0 m-0">
-              {data.map((item, index) => {
-                return (
-                  <ItemResultadoCatalogo
-                    key={item.id}
-                    id={item.id}
-                    details={item.details}
-                    premium={item.premium}
-                  />
-                );
-              })}
-            </Row> */}
 
           </section>
           <footer className={`d-flex ${styles.rodape}`}>

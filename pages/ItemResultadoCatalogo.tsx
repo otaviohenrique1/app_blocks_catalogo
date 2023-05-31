@@ -1,16 +1,22 @@
 import Image from 'next/image';
 import { Card, CardBody, CardFooter, CardText, Col } from 'reactstrap';
 import { BsArrowUpRight } from "react-icons/bs";
+import { DataListType } from '@/types/types';
 import styles from '@/styles/Home.module.css';
-import { open_sans, DataListType } from '.';
+import { Open_Sans } from 'next/font/google';
 
 /*
-  http://localhost:8080/families*
-  http://localhost:8080/families?skip=0&take=10
-  http://localhost:8080/families?skip=10&take=10
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/ID DA FAMÍLIA.jpg
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/abc-123.jpg
+http://localhost:8080/families*
+http://localhost:8080/families?skip=0&take=10
+http://localhost:8080/families?skip=10&take=10
+https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/ID DA FAMÍLIA.jpg
+https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/abc-123.jpg
 */
+
+const open_sans = Open_Sans({ subsets: ['latin'] });
+
+export type ItemResultadoCatalogoTypes = DataListType;
+
 export function ItemResultadoCatalogo(props: ItemResultadoCatalogoTypes) {
   const { id, premium, details } = props;
   const { name, description } = details;
@@ -39,5 +45,3 @@ export function ItemResultadoCatalogo(props: ItemResultadoCatalogoTypes) {
     </Col>
   );
 }
-
-export type ItemResultadoCatalogoTypes = DataListType;
