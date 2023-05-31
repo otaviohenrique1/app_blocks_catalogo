@@ -107,7 +107,7 @@ export default function Home() {
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
 
             {/* Para Teste ------ Remover */}
-            <Form
+            {/* <Form
               className="mb-5"
               onSubmit={(event) => {
                 event.preventDefault();
@@ -134,7 +134,7 @@ export default function Home() {
                 />
               </InputGroup>
               <Button color="primary" type="submit" className="me-2">Salvar</Button>
-            </Form>
+            </Form> */}
             {/* Para Teste ------ Remover */}
 
             <Row className="p-0 m-0">
