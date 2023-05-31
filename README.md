@@ -1,9 +1,13 @@
 # app_blocks_catalogo
 
 ## Scripts
-First, run the development server:
+-npm run dev
+-npm run build
+-npm run start
+-npm run lint
 
-- npm run dev
+```bash
+npm run dev
 # or
 yarn dev
 # or
