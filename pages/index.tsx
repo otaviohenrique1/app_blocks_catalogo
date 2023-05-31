@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Button, Form, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
+import { Button, Row } from 'reactstrap';
 import { BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import imagem from "@/assets/images/imagem.png";
-import api from "@/utils/api";
 import { Open_Sans } from 'next/font/google';
-import { log } from 'console';
-import axios from 'axios';
 import { ItemResultadoCatalogo } from './ItemResultadoCatalogo';
 export const open_sans = Open_Sans({ subsets: ['latin'] });
 
@@ -34,58 +30,29 @@ const dadosIniciais: DataListType = {
 };
 
 export default function Home() {
-  const [itens, setItem] = useState<DataListType[]>([]);
-  const [pagina, setPagina] = useState<number>(0);
-  const [quantidade, setQuantidade] = useState<number>(10);
-  const [carregaMais, setCarregaMais] = useState<boolean>(true);
-
-  // const [item, setItem] = useState<DataListType>(dadosIniciais);
-  // const [campoPaginas, setCampoPaginas] = useState<number>(0);
-  // const [campoQuantidade, setCampoQuantidade] = useState<number>(0);
-
-  /*
-    useEffect(() => {
-      // let inicio = 0;
-      // let fim = 2;
-      // api.get(`skip=${inicio}&take=${fim}`)
-      //   .then((itens) => {
-      //     // let lista = itens.data;
-      //     // setData(lista);
-      //     // console.log(lista);
-      //   })
-      //   .catch((erro) => {
-      //     console.log(erro);
-      //   });
-      // axios.get("http://localhost:8080/families?skip=0&take=10")
-
-      let url = `http://localhost:8080/families?skip=${pagina}&take=${quantidade}`;
-
-      axios.get(url)
-        .then((data) => {
-          let lista = [...data.data];
-          setData(lista);
-        })
-        .catch((erro) => {
-          console.log(erro);
-        });
-    }, [pagina, quantidade]);
-  */
+  const [items, setItems] = useState<DataListType[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = () => {
-    let url = `http://localhost:8080/families?skip=${pagina}&take=${quantidade}`;
+    let itensPorPagina = 20;
+
+    let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
 
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        let novosItens: DataListType[] = data.data;
+        let novosItens = data;
         let proximaPagina: boolean = data.hasNextPage;
-        setItem([...itens, ...novosItens]);
-        setCarregaMais(proximaPagina);
-        setPagina(pagina + 10)
+        console.log(proximaPagina);
+        
+        setItems([...items, ...novosItens]);
+        setHasMore(proximaPagina);
+        setPage(page + 10)
       })
       .catch((erro) => {
         console.error('Erro ao buscar dados:', erro);
@@ -122,48 +89,15 @@ export default function Home() {
 
           <section className={`${styles.resultados}`}>
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
-
-            {/* Para Teste ------ Remover */}
-            {/* <Form
-              className="mb-5"
-              onSubmit={(event) => {
-                event.preventDefault();
-                setPaginas(campoPaginas);
-                setQuantidade(campoQuantidade);
-              }}
+            <InfiniteScroll
+              dataLength={items.length}
+              next={fetchData}
+              // hasMore={hasMore}
+              hasMore={true}
+              loader={<h4>Carregando...</h4>}
             >
-              <InputGroup className="mb-2">
-                <InputGroupText>Pagina</InputGroupText>
-                <Input
-                  type="number"
-                  placeholder="pagina"
-                  value={campoPaginas}
-                  onChange={(event) => setCampoPaginas(parseInt(event.target.value))}
-                />
-              </InputGroup>
-              <InputGroup className="mb-2">
-                <InputGroupText>Quantidade</InputGroupText>
-                <Input
-                  type="number"
-                  placeholder="quantidade"
-                  value={campoQuantidade}
-                  onChange={(event) => setCampoQuantidade(parseInt(event.target.value))}
-                />
-              </InputGroup>
-              <Button color="primary" type="submit" className="me-2">Salvar</Button>
-            </Form> */}
-            {/* Para Teste ------ Remover */}
-
-
-
-            <Row className="p-0 m-0">
-              <InfiniteScroll
-                dataLength={itens.length}
-                next={fetchData}
-                hasMore={carregaMais}
-                loader={<h4>Carregando...</h4>}
-              >
-                {itens.map((item, index) => {
+              <Row className="p-0 m-0">
+                {items.map((item, index) => {
                   return (
                     <ItemResultadoCatalogo
                       key={item.id}
@@ -173,8 +107,8 @@ export default function Home() {
                     />
                   );
                 })}
-              </InfiniteScroll>
-            </Row>
+              </Row>
+            </InfiniteScroll>
 
             {/* <Row className="p-0 m-0">
               {data.map((item, index) => {
