@@ -9,6 +9,7 @@ import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Open_Sans } from 'next/font/google';
 import { ItemResultadoCatalogo } from './ItemResultadoCatalogo';
+import axios from 'axios';
 export const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export interface DataListType {
@@ -32,26 +33,64 @@ const dadosIniciais: DataListType = {
 export default function Home() {
   const [items, setItems] = useState<DataListType[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  // const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  /*
+    const fetchData = () => {
+      let itensPorPagina = 20;
+
+      let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          let novosItens = data;
+          let proximaPagina: boolean = data.hasNextPage;
+          console.log(proximaPagina);
+          
+          setItems([...items, ...novosItens]);
+          setHasMore(proximaPagina);
+          setPage(page + 10)
+        })
+        .catch((erro) => {
+          console.error('Erro ao buscar dados:', erro);
+        });
+    };
+  */
+
+  /*
+    const fetchData = () => {
+      let itensPorPagina = 20;
+
+      let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
+
+      axios.get(url)
+        .then((data) => {
+          let novosItens = data.data;
+          
+          setItems([...items, ...novosItens]);
+          setPage(page + 10)
+        })
+        .catch((erro) => {
+          console.error('Erro ao buscar dados:', erro);
+        });
+    };
+  */
 
   const fetchData = () => {
     let itensPorPagina = 20;
 
     let url = `http://localhost:8080/families?skip=${page}&take=${itensPorPagina}`;
 
-    fetch(url)
-      .then((response) => response.json())
+    axios.get(url)
       .then((data) => {
-        let novosItens = data;
-        let proximaPagina: boolean = data.hasNextPage;
-        console.log(proximaPagina);
+        let novosItens = data.data;
         
         setItems([...items, ...novosItens]);
-        setHasMore(proximaPagina);
         setPage(page + 10)
       })
       .catch((erro) => {
