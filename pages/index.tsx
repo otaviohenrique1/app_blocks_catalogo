@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button, Card, CardBody, CardFooter, CardText, Col, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardText, Col, Form, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
 import { BsArrowUpRight, BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import styles from '@/styles/Home.module.css';
@@ -13,38 +13,6 @@ import { Open_Sans } from 'next/font/google';
 import { log } from 'console';
 import axios from 'axios';
 const open_sans = Open_Sans({ subsets: ['latin'] });
-
-
-
-interface DetailsTypes {
-  name: string;
-  description: string;
-}
-
-interface DataTypes {
-  id: string;
-  premium: boolean;
-  details: DetailsTypes;
-}
-
-let a = [
-  {
-    "id": "0032a1b5-8b30-4e10-a27c-3bd818d2f376",
-    "premium": true,
-    "details": {
-      "name": "Copo Descartável",
-      "description": "Copo descartável para café"
-    }
-  },
-  {
-    "id": "00577e1d-1c0f-4992-a680-bc29c305202d",
-    "premium": true,
-    "details": {
-      "name": "Balanço Rústico",
-      "description": "Banco de madeira para 2 pessoas"
-    }
-  }
-];
 
 interface DataListType {
   id: string;
@@ -75,7 +43,11 @@ const dadosIniciais: DataListType = {
 export default function Home() {
   const [data, setData] = useState<DataListType[]>([]);
   const [item, setItem] = useState<DataListType>(dadosIniciais);
-  const [pagina, setPagina] = useState<number>(0);
+  const [paginas, setPaginas] = useState<number>(0);
+  const [quantidade, setQuantidade] = useState<number>(0);
+
+  const [campoPaginas, setCampoPaginas] = useState<number>(0);
+  const [campoQuantidade, setCampoQuantidade] = useState<number>(0);
 
   useEffect(() => {
     // let inicio = 0;
@@ -89,25 +61,19 @@ export default function Home() {
     //   .catch((erro) => {
     //     console.log(erro);
     //   });
-    axios.get("http://localhost:8080/families?skip=0&take=10")
+    // axios.get("http://localhost:8080/families?skip=0&take=10")
+
+    let url = `http://localhost:8080/families?skip=${paginas}&take=${quantidade}`;
+
+    axios.get(url)
       .then((data) => {
         let lista = [...data.data];
-        // console.log(lista);
         setData(lista);
-
-        // console.log(lista[1]);
-        // setItem(lista);
-        // console.log(item);
-
-        // console.log(data.data);
-        // setData([...items.data]);
-        // console.log(data);
-        // console.log(data);
       })
       .catch((erro) => {
         console.log(erro);
       });
-  }, []);
+  }, [paginas, quantidade]);
 
   return (
     <>
@@ -139,6 +105,38 @@ export default function Home() {
 
           <section /* className="me-5 ms-5" */ className={`${styles.resultados}`}>
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
+
+            {/* Para Teste ------ Remover */}
+            <Form
+              className="mb-5"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setPaginas(campoPaginas);
+                setQuantidade(campoQuantidade);
+              }}
+            >
+              <InputGroup className="mb-2">
+                <InputGroupText>Pagina</InputGroupText>
+                <Input
+                  type="number"
+                  placeholder="pagina"
+                  value={campoPaginas}
+                  onChange={(event) => setCampoPaginas(parseInt(event.target.value))}
+                />
+              </InputGroup>
+              <InputGroup className="mb-2">
+                <InputGroupText>Quantidade</InputGroupText>
+                <Input
+                  type="number"
+                  placeholder="quantidade"
+                  value={campoQuantidade}
+                  onChange={(event) => setCampoQuantidade(parseInt(event.target.value))}
+                />
+              </InputGroup>
+              <Button color="primary" type="submit" className="me-2">Salvar</Button>
+            </Form>
+            {/* Para Teste ------ Remover */}
+
             <Row className="p-0 m-0">
               {data.map((item, index) => {
                 return (
