@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Button, Card, CardBody, CardFooter, CardText, Col, Form, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
-import { BsArrowUpRight, BsArrowRight } from "react-icons/bs";
+import { Button, Form, Input, InputGroup, InputGroupText, Row } from 'reactstrap';
+import { BsArrowRight } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from '@/styles/Home.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagem from "@/assets/images/imagem.png";
@@ -12,9 +12,10 @@ import api from "@/utils/api";
 import { Open_Sans } from 'next/font/google';
 import { log } from 'console';
 import axios from 'axios';
-const open_sans = Open_Sans({ subsets: ['latin'] });
+import { ItemResultadoCatalogo } from './ItemResultadoCatalogo';
+export const open_sans = Open_Sans({ subsets: ['latin'] });
 
-interface DataListType {
+export interface DataListType {
   id: string;
   premium: boolean;
   details: {
@@ -32,48 +33,64 @@ const dadosIniciais: DataListType = {
   }
 };
 
-/*
-  http://localhost:8080/families*
-  http://localhost:8080/families?skip=0&take=10
-  http://localhost:8080/families?skip=10&take=10
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/ID DA FAMÍLIA.jpg
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/abc-123.jpg
-*/
-
 export default function Home() {
-  const [data, setData] = useState<DataListType[]>([]);
-  const [item, setItem] = useState<DataListType>(dadosIniciais);
-  const [paginas, setPaginas] = useState<number>(0);
-  const [quantidade, setQuantidade] = useState<number>(0);
+  const [itens, setItem] = useState<DataListType[]>([]);
+  const [pagina, setPagina] = useState<number>(0);
+  const [quantidade, setQuantidade] = useState<number>(10);
+  const [carregaMais, setCarregaMais] = useState<boolean>(true);
 
-  const [campoPaginas, setCampoPaginas] = useState<number>(0);
-  const [campoQuantidade, setCampoQuantidade] = useState<number>(0);
+  // const [item, setItem] = useState<DataListType>(dadosIniciais);
+  // const [campoPaginas, setCampoPaginas] = useState<number>(0);
+  // const [campoQuantidade, setCampoQuantidade] = useState<number>(0);
+
+  /*
+    useEffect(() => {
+      // let inicio = 0;
+      // let fim = 2;
+      // api.get(`skip=${inicio}&take=${fim}`)
+      //   .then((itens) => {
+      //     // let lista = itens.data;
+      //     // setData(lista);
+      //     // console.log(lista);
+      //   })
+      //   .catch((erro) => {
+      //     console.log(erro);
+      //   });
+      // axios.get("http://localhost:8080/families?skip=0&take=10")
+
+      let url = `http://localhost:8080/families?skip=${pagina}&take=${quantidade}`;
+
+      axios.get(url)
+        .then((data) => {
+          let lista = [...data.data];
+          setData(lista);
+        })
+        .catch((erro) => {
+          console.log(erro);
+        });
+    }, [pagina, quantidade]);
+  */
 
   useEffect(() => {
-    // let inicio = 0;
-    // let fim = 2;
-    // api.get(`skip=${inicio}&take=${fim}`)
-    //   .then((itens) => {
-    //     // let lista = itens.data;
-    //     // setData(lista);
-    //     // console.log(lista);
-    //   })
-    //   .catch((erro) => {
-    //     console.log(erro);
-    //   });
-    // axios.get("http://localhost:8080/families?skip=0&take=10")
+    fetchData();
+  }, []);
 
-    let url = `http://localhost:8080/families?skip=${paginas}&take=${quantidade}`;
+  const fetchData = () => {
+    let url = `http://localhost:8080/families?skip=${pagina}&take=${quantidade}`;
 
-    axios.get(url)
+    fetch(url)
+      .then((response) => response.json())
       .then((data) => {
-        let lista = [...data.data];
-        setData(lista);
+        let novosItens: DataListType[] = data.data;
+        let proximaPagina: boolean = data.hasNextPage;
+        setItem([...itens, ...novosItens]);
+        setCarregaMais(proximaPagina);
+        setPagina(pagina + 10)
       })
       .catch((erro) => {
-        console.log(erro);
+        console.error('Erro ao buscar dados:', erro);
       });
-  }, [paginas, quantidade]);
+  };
 
   return (
     <>
@@ -103,7 +120,7 @@ export default function Home() {
             <span className={`${styles.gradiente} ${styles.catalogo_span_gradiente}`} />
           </section>
 
-          <section /* className="me-5 ms-5" */ className={`${styles.resultados}`}>
+          <section className={`${styles.resultados}`}>
             <h2 className={`${styles.resultados_titulo} ${open_sans.className}`}>Resultados</h2>
 
             {/* Para Teste ------ Remover */}
@@ -137,7 +154,29 @@ export default function Home() {
             </Form> */}
             {/* Para Teste ------ Remover */}
 
+
+
             <Row className="p-0 m-0">
+              <InfiniteScroll
+                dataLength={itens.length}
+                next={fetchData}
+                hasMore={carregaMais}
+                loader={<h4>Carregando...</h4>}
+              >
+                {itens.map((item, index) => {
+                  return (
+                    <ItemResultadoCatalogo
+                      key={item.id}
+                      id={item.id}
+                      details={item.details}
+                      premium={item.premium}
+                    />
+                  );
+                })}
+              </InfiniteScroll>
+            </Row>
+
+            {/* <Row className="p-0 m-0">
               {data.map((item, index) => {
                 return (
                   <ItemResultadoCatalogo
@@ -148,7 +187,8 @@ export default function Home() {
                   />
                 );
               })}
-            </Row>
+            </Row> */}
+
           </section>
           <footer className={`d-flex ${styles.rodape}`}>
             <Link href="#" className={`mb-0 text-decoration-none ${open_sans.className} ${styles.rodape_lista_item}`}>Sobre</Link>
@@ -163,42 +203,4 @@ export default function Home() {
   );
 }
 
-/*
-  http://localhost:8080/families*
-  http://localhost:8080/families?skip=0&take=10
-  http://localhost:8080/families?skip=10&take=10
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/ID DA FAMÍLIA.jpg
-  https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/abc-123.jpg
-*/
 
-type ItemResultadoCatalogoTypes = DataListType;
-
-function ItemResultadoCatalogo(props: ItemResultadoCatalogoTypes) {
-  const { id, premium, details } = props;
-  const { name, description } = details;
-
-  return (
-    <Col className={`p-0 m-0 mb-3 ${styles.card_col}`}>
-      <Card className={`${styles.card_container}`}>
-        <CardBody className="d-flex justify-content-center align-items-center">
-          <Image
-            src={`https://plugin-storage.nyc3.digitaloceanspaces.com/families/images/${id}.jpg`}
-            alt="imagem"
-            className="img-fluid"
-            width={100}
-            height={50}
-          />
-          {/* <Image src={imagem} alt="imagem" className="img-fluid" /> */}
-        </CardBody>
-        <CardFooter className="d-flex justify-content-center align-items-center">
-          <CardText className={`mb-0 ${open_sans.className} ${styles.card_texto}`}>
-            {name}
-            {/* Lorem Ipsum is sLorem Ipsum is simply .... */}
-          </CardText>
-          <span className={`me-2 ms-2 ${styles.cardtext_separator}`} />
-          <BsArrowUpRight color='#474747' size={16} className={styles.card_icone_botao} />
-        </CardFooter>
-      </Card>
-    </Col>
-  );
-}
